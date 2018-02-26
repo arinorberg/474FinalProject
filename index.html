@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Assignment 3</title>
+      <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="./css/style.css">
+      </link>
+   </head>
+   <body>
+
+      <!-- D3 -->
+      <script src="https://d3js.org/d3-color.v1.min.js"></script>
+      <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+      <!-- jQuery -->
+      <script src="./js/jquery-3.3.1.min.js"></script>
+      <script src="./js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+      <script>
+         // layout based on: http://blockbuilder.org/Jverma/076377dd0125b1a508621441752735fc
+         var margin = {top: 40, right: 50, bottom: 40, left:50};
+         var width = +700 - margin.left - margin.right;
+         var height = +575 - margin.top - margin.bottom;
+         var svg = d3.select('body')
+         	.append('svg')
+         	.attr('width', width + margin.left + margin.right)
+         	.attr('height', height + margin.top + margin.bottom)
+         .append('g')
+         	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            <div class="box">
+
+               <!--button-->
+               <div class="button">
+                  <button id="button">button</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -11,17 +11,35 @@
     <div class="box">
 
 
-        <!--dropdown-->
+      <p>----About Person: </p>
         <div class="dropdown">
                  <p class ="interactionLabel">Choose gender</p>
                  <select id="dropdownGender"></select>
         </div>
 
-        <p>Current Blood Alcohol Content: </p>
-        <p id="currBAC"></p>
+        <form name="weightForm">
+          Weight: <input type="text" name="weightInput"><br>
+          <input type="submit" value="Submit">
+        </form>
 
-        <p>You are experiencing: </p>
-        <p id="currEffects"></p>
+      <p>----Drinking Behaviors: </p>
+      <form name="drinkingInputs">
+        Number of Drinks: <input type="number" name="numDrinksInput"><br>
+        Number of onces in each drink: <input type="number" name="ouncesInput"><br>
+        Percentag of alcohol of drink: <input type="number" name="percentageInput"><br>
+        Time spent drinking (hours): <input type="number" name="numDrinksInput"><br>
+        <input type="submit" value="Submit">
+      </form>
+
+
+        <!-- drunkness values -->
+        <p>----Drunkness: </p>
+          <p>Current Blood Alcohol Content: </p>
+          <p id="currBAC"></p>
+
+          <p>You are experiencing: </p>
+          <p id="currEffects"></p>
+
 
 
     </div>

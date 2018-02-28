@@ -36,22 +36,22 @@ dropDown.on("change", function() {
 
     // about their drinking behavior
     var numDrinks;
-    var oz;
+    var ounces;
     var percentage;
     var hours;
 
-    function alcoholContent(num, oz, percentage) {
-        var alc = num * oz * percentage;
+    function alcoholContent(num, ounces, percentage) {
+        var alc = num * ounces * percentage;
         return alc;
     }
 
-     var alcohol = alcoholContent(numDrinks, oz, percentage);
+    var alcohol;
 
     // blood alcohol content
     var currentBAC;
 
 
- function BACcalculator(W, H, G, A) {
+ function BACcalculator(W, G, A, H) {
    var r;
    if (G === 'female') {
      r = .66;
@@ -70,8 +70,26 @@ dropDown.on("change", function() {
   alcohol = alcoholContent(7, 12, 0.05);
   gender = "male";
   console.log("alcohol: " + alcohol);
-  currentBAC = BACcalculator(weight, hours, gender, alcohol);
+  currentBAC = BACcalculator(weight, gender, alcohol, hours);
   console.log(currentBAC);
+
+
+  // BROKEN - IDK HOW TO GET INPUTS FROM FORM
+  // weight = document.forms["weightForm"].getElementsByTagName("weightInput");
+  // numDrinks = document.forms["drinkingInputs"].getElementsByTagName("numDrinksInput");
+  // percentage =   document.forms["drinkingInputs"].getElementsByTagName("percentageInput");
+  // ounces = document.forms["drinkingInputs"].getElementsByTagName("ouncesInput");
+  // hours = document.forms["drinkingInputs"].getElementsByTagName("hoursInput");
+
+  // alcohol = alcoholContent(numDrinks, ounces, percentage);
+  // currentBAC = BACcalculator(weight, gender, alcohol, hours);
+
+
+
+
+
+
+
 
 
   //var drunkness = d3.circle();

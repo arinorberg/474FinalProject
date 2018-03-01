@@ -6,55 +6,46 @@
 
 </head>
 <body>
+  <div class="box">
+
+    <p>----About Person: </p>
+      <div class="dropdown">
+               <p class ="interactionLabel">Choose gender</p>
+               <select id="dropdownGender"></select>
+      </div>
+
+    Weight: <input type="text" name="weightInput" id="w_value"><br>
+
+    <p>----Drinking Behaviors: </
+    Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
+    Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
+    Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
+    Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
+
+    <button id="d_submit">submit</button>
 
 
-    <div class="box">
+    <!-- drunkness values -->
+    <p>----Drunkness: </p>
+      <p>Current Blood Alcohol Content: </p>
+      <p id="currBAC"></p>
+
+      <p>You are experiencing: </p>
+      <p id="currEffects"></p>
+
+  </div>
 
 
-      <p>----About Person: </p>
-        <div class="dropdown">
-                 <p class ="interactionLabel">Choose gender</p>
-                 <select id="dropdownGender"></select>
-        </div>
+  <!-- D3 -->
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
 
-        <form name="weightForm">
-          Weight: <input type="text" name="weightInput" id="w_value"><br>
-          <input id="w_submit" type="submit" value="Submit" >
-        </form>
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-      <p>----Drinking Behaviors: </p>
-      <form name="drinkingInputs">
-        Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
-        Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
-        Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
-        Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
-        <input type="submit" value="Submit" id="d_submit">
-      </form>
-
-
-        <!-- drunkness values -->
-        <p>----Drunkness: </p>
-          <p>Current Blood Alcohol Content: </p>
-          <p id="currBAC"></p>
-
-          <p>You are experiencing: </p>
-          <p id="currEffects"></p>
-
-
-
-    </div>
-
-
-    <!-- D3 -->
-    <script src="https://d3js.org/d3-color.v1.min.js"></script>
-    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-
-    <!-- Javascript -->
-    <script src="./js/index.js"></script>
+  <!-- Javascript -->
+  <script src="./js/index.js"></script>
 
 </body>

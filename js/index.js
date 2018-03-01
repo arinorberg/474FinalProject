@@ -75,7 +75,19 @@ dropDown.on("change", function() {
 
 
   // BROKEN - IDK HOW TO GET INPUTS FROM FORM
-  // weight = document.forms["weightForm"].getElementsByTagName("weightInput");
+    document.getElementById('w_submit').onclick = function(){
+        new_weight = document.getElementById('w_value').value;
+        console.log(new_weight);
+    };
+
+    document.getElementById('d_submit').onclick = function(){
+        new_time = document.getElementById('time').value;
+        new_percent = document.getElementById('percent').value;
+        new_ounces = document.getElementById('ounces').value;
+        new_num_drinks = document.getElementById('num_drinks').value;
+        
+        console.log(new_time + "    " + new_percent + "    " + new_ounces + "   " + new_num_drinks);
+    };
   // numDrinks = document.forms["drinkingInputs"].getElementsByTagName("numDrinksInput");
   // percentage =   document.forms["drinkingInputs"].getElementsByTagName("percentageInput");
   // ounces = document.forms["drinkingInputs"].getElementsByTagName("ouncesInput");
@@ -115,7 +127,7 @@ dropDown.on("change", function() {
          } else if (currentBAC < .19){
              effects = "Dysphoria predominates, nausea may appear. The drinker has the appearance of a \"sloppy drunk.\""
          } else if (currentBAC < .20){
-             effects = "Felling dazed, confused or otherwise disoriented. May need help to stand or walk. If you injure yourself you may not feel the pain. Some people experience nausea and vomiting at this level. The gag reflex is impaired and you can choke if you do vomit. Blackouts are likely at this level so you may not remember what has happened."
+             effects = "Feeling dazed, confused or otherwise disoriented. May need help to stand or walk. If you injure yourself you may not feel the pain. Some people experience nausea and vomiting at this level. The gag reflex is impaired and you can choke if you do vomit. Blackouts are likely at this level so you may not remember what has happened."
          } else if (currentBAC < .25){
              effects = "All mental, physical and sensory functions are severely impaired. Increased risk of asphyxiation from choking on vomit and of seriously injuring yourself by falls or other accidents."
          } else if (currentBAC < .30){

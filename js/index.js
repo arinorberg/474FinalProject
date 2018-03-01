@@ -29,7 +29,7 @@ dropDown.on("change", function() {
 });
 
 function alcoholContent(num, ounces, percentage) {
-    var alc = num * ounces * percentage;
+    var alc = num * ounces * (percentage * .01);
     return alc;
 }
 
@@ -97,8 +97,27 @@ document.getElementById('d_submit').onclick = function(){
   console.log(new_time + "    " + new_percent + "    " + new_ounces + "   " + new_num_drinks);
 
   //  update output
-  updateOutput(new_gender, new_weight, new_time, new_percent, new_ounces, new_num_drinks);
+  if(ensureFilled() == true) {
+    updateOutput(new_gender, new_weight, new_time, new_percent, new_ounces, new_num_drinks);
+  } else {
+    alert("not all fields are filled");
+  }
+
 };
 
 
 //var drunkness = d3.circle();
+
+//Ensures that all input fields are filled -- throws an alert if not
+function ensureFilled() {
+    if(document.getElementById('dropdownGender').value =! null &&
+        document.getElementById('w_value').value != null &&
+        document.getElementById('time').value != null &&
+        document.getElementById('percent').value != null &&
+        document.getElementById('ounces').value != null &&
+        document.getElementById('num_drinks').value != null) {
+            return true
+        } else {
+            return false;
+        }
+}

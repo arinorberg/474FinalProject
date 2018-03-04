@@ -11,6 +11,7 @@ var svg = d3.select('body')
 
 
 // setup
+var currentBAC = 0;
 var gender;
 var gender_options = ["male", "female"];
 var drug;
@@ -67,7 +68,7 @@ function BACcalculator(W, G, A, H) {
  function currentEffects(currentBAC) {
    var effects;
    if (currentBAC < .02) {
-     effects = "not significant effects"
+     effects = "no significant effects"
    } else if (currentBAC < .03){
        effects = "No loss of coordination, slight euphoria and loss of shyness. Depressant effects are not apparent. Mildly relaxed and maybe a little lightheaded."
    } else if (currentBAC < .06){
@@ -86,8 +87,10 @@ function BACcalculator(W, G, A, H) {
        effects = "All mental, physical and sensory functions are severely impaired. Increased risk of asphyxiation from choking on vomit and of seriously injuring yourself by falls or other accidents."
    } else if (currentBAC < .30){
        effects = "STUPOR. You have little comprehension of where you are. You may pass out suddenly and be difficult to awaken."
-   } else {
+   } else if (currentBAC > .30){
        effects = "Coma is possible. This is the level of surgical anesthesia. "
+   } else {
+     effects = "no effects"
    }
   return effects;
 }
@@ -116,7 +119,7 @@ function drugCombo(drug) {
 }
 
 function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
-  var alcohol = alcoholContent(num_drinks, ounces, percent);
+  alcohol = alcoholContent(num_drinks, ounces, percent);
   currentBAC = BACcalculator(weight, gender, alcohol, time);
   console.log(currentBAC);
   var effects = currentEffects(currentBAC)

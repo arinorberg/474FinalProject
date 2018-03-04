@@ -3,3 +3,17 @@
 h2 {
   font-size: .5em;
 }
+
+#dropdownGender, #dropdownDrug {
+  margin-bottom: 15px;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+#effects {
+  border: black solid 1px;
+  padding: 10px;
+  border-radius: 15px;
+}

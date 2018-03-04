@@ -21,34 +21,37 @@
                 <p class ="interactionLabel">Choose gender</p>
                 <select id="dropdownGender"></select>
         </div>
-        <p>Weight: </p><input type="text" name="weightInput" id="w_value"><br>
+        Weight: <input type="text" name="weightInput" id="w_value"><br>
+    </div>
+    <div class=container>
+        <h2>Drinking Behaviors: </h2>
+        Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
+        Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
+        Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
+        Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
     </div>
 
-    <h2>Drinking Behaviors: </h2>
-    Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
-    Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
-    Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
-    Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
-
-    <h2>Drug Use: </h2>
-    <div class="dropdown">
-            <p class ="interactionLabel">Drug taken: </p>
-            <select id="dropdownDrug"></select>
+    <div class="container">
+        <h2>Drug Use: </h2>
+        <div class="dropdown">
+                <p class ="interactionLabel">Drug taken: </p>
+                <select id="dropdownDrug"></select>
+        </div>
+        <button id="d_submit">submit</button>
     </div>
-
-    <button id="d_submit">submit</button>
-
 
     <!-- drunkness values -->
-    <h2>Effects: </h2>
-      <h3>Current Blood Alcohol Content: </h3>
-      <p id="currBAC"></p>
-
-      <h3>Symptoms: </h3>
-      <p id="currEffects"></p>
-
-      <h3>Drug use with alcohol is: </h3>
-      <p id="currDrugEffects"></p>
+    <div class="container" id="effects">
+        <h2>Effects: </h2>
+        <h3>Current Blood Alcohol Content: </h3>
+        <p id="currBAC"></p>
+  
+        <h3>Symptoms: </h3>
+        <p id="currEffects"></p>
+  
+        <h3>Drug use with alcohol is: </h3>
+        <p id="currDrugEffects"></p> 
+    </div>
 
   </div>
 

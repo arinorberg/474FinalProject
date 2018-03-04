@@ -204,22 +204,19 @@ document.getElementById('d_submit').onclick = function(){
 
 };
 
-
+// circle to represent drunkness
 var drunkCircle = svg.append("circle")
-  .attr("cx", 25)
+  .attr("cx", width/2)
   .attr("cy", 25)
   .attr("r", 30)
   .style("fill", "red");
 
-  //
-//Always start by appending a defs (definitions) element
+// for gausian blur filter
 var defs = svg.append("defs");
-
-
 
 //Ensures that all input fields are filled -- throws an alert if not
 function ensureFilled() {
-    if(document.getElementById('dropdownGender').value =! null &&
+    if(document.getElementById('dropdownGender').value != null &&
         document.getElementById('w_value').value != null &&
         document.getElementById('time').value != null &&
         document.getElementById('percent').value != null &&

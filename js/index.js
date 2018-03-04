@@ -15,7 +15,7 @@ var currentBAC = 0;
 var gender;
 var gender_options = ["male", "female"];
 var drug;
-var drug_options = ["None", "Schrooms", "Cannabis", "MDMA", "Cocaine", "Caffeine", "Benzodiazepines", "Opiods"]
+var drug_options = ["None", "Shrooms", "Cannabis", "MDMA", "Cocaine", "Caffeine", "Benzodiazepines", "Opiods"]
 
 // update drug when selection is changed from dropdown
 d3.select("#dropdownDrug")
@@ -132,9 +132,6 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
   document.getElementById("currEffects").innerHTML = effects;
   // print current drug effects
   document.getElementById("currDrugEffects").innerHTML = combo;
-  // update drunk circle
-  // var BACsize = currentBAC * 500;
-  // drunkCircle.attr("r", BACsize);
   // figure out drunk blurriness
   if (currentBAC < .02) {
     defs.append("filter")
@@ -182,8 +179,11 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     .attr("in", "SourceGraphic")
       .attr("stdDeviation", "8 6");
   }
+
+  // update drunk circle
+  var BACsize = currentBAC * 1000;
   //Apply the blur filter to the drunk circle element
-    drunkCircle.style("filter", "url(#motionFilter)");
+    drunkCircle.transition().attr("r", BACsize).style("filter", "url(#motionFilter)").duration(2500)
 };
 
 // onclick for drink details

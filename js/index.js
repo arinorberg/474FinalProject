@@ -180,10 +180,11 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
       .attr("stdDeviation", "8 0");
   }
 
-  // update drunk circle
-  //Apply the blur filter to the drunk circle element
+  // drunkness visualizations
   var bacSize = currentBAC * 200
+    //size rectngle based on curren BAC
   drunkRect.transition().attr("height", bacSize).duration(4000);
+    //Apply the blur filter to the drunk circle element
   barImage.style("filter", "url(#motionFilter)").duration(4000);
 };
 

@@ -159,7 +159,7 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
       .append("feGaussianBlur")
       .attr("class", "blurValues")
       .attr("in", "SourceGraphic")
-    	.attr("stdDeviation", "4 2");
+    	.attr("stdDeviation", "4 0");
   } else if (currentBAC < .15){
     defs.append("filter")
     .attr("id", "motionFilter")
@@ -168,7 +168,7 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     .append("feGaussianBlur")
     .attr("class", "blurValues")
     .attr("in", "SourceGraphic")
-      .attr("stdDeviation", "6 4");
+    .attr("stdDeviation", "6 0");
   } else {
     defs.append("filter")
     .attr("id", "motionFilter")
@@ -177,13 +177,14 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     .append("feGaussianBlur")
     .attr("class", "blurValues")
     .attr("in", "SourceGraphic")
-      .attr("stdDeviation", "8 6");
+      .attr("stdDeviation", "8 0");
   }
 
   // update drunk circle
-  var BACsize = currentBAC * 1000;
   //Apply the blur filter to the drunk circle element
-    drunkCircle.transition().attr("r", BACsize).style("filter", "url(#motionFilter)").duration(2500)
+  var bacSize = currentBAC * 200
+  drunkRect.transition().attr("height", bacSize).duration(4000);
+  barImage.style("filter", "url(#motionFilter)").duration(4000);
 };
 
 // onclick for drink details
@@ -208,11 +209,19 @@ document.getElementById('d_submit').onclick = function(){
 };
 
 // circle to represent drunkness
-var drunkCircle = svg.append("circle")
+var drunkRect = svg.append("rect")
   .attr("cx", width/2)
   .attr("cy", 25)
-  .attr("r", 30)
+  .attr("width", 50)
+  .attr("height", 10)
   .style("fill", "red");
+
+var barImage = svg.append("image")
+  .attr("xlink:href", "bar.jpg")
+  .attr("cx", width/2)
+  .attr("cy", 10)
+  .attr("height", "550px")
+  .attr("width", "550px")
 
 // for gausian blur filter
 var defs = svg.append("defs");

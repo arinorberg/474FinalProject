@@ -13,6 +13,22 @@ var svg = d3.select('body')
 // setup
 var gender;
 var gender_options = ["male", "female"];
+var drug;
+var drug_options = ["None", "Schrooms", "Cannabis", "MDMA", "Cocaine", "Caffeine", "Benzodiazepines", "Opiods"]
+
+// update drug when selection is changed from dropdown
+d3.select("#dropdownDrug")
+.selectAll("option")
+.data(drug_options)
+.enter()
+.append("option")
+.attr("value", function(option) { return option; })
+.property("selected", function(d){ return d === drug})
+.text(function(option) { return option; });
+var dropDown = d3.select("#dropdownDrug");
+dropDown.on("change", function() {
+  drug = d3.event.target.value;
+});
 
 // update gender when selection is changed from dropdown
 d3.select("#dropdownGender")
@@ -41,12 +57,15 @@ function BACcalculator(W, G, A, H) {
  else {
    r = .73;
  }
+
  // formula for blood alcohol content
  var BAC = ((A * 5.14 )/ (W * r) - (0.015 * H));
  return BAC;
-}
+ }
 
+ // BAC effects based on: http://www.brad21.org/effects_at_specific_bac.html
  function currentEffects(currentBAC) {
+   var effects;
    if (currentBAC < .02) {
      effects = "not significant effects"
    } else if (currentBAC < .03){
@@ -73,16 +92,95 @@ function BACcalculator(W, G, A, H) {
   return effects;
 }
 
-function updateOutput(gender, weight, time, percent, ounces, num_drinks) {
+// drug combo based on : https://www.refinery29.com/drug-interactions-chart
+function drugCombo(drug) {
+  var combo;
+  if (drug == "Shrooms") {
+    combo = "safe and no synergy"
+  } else if (drug == "Cannabis") {
+    combo = "safe and no synergy"
+  } else if (drug == "MDMA") {
+    combo = "UNSAFE"
+  } else if (drug == "Cocaine") {
+    combo = "UNSAFE"
+  } else if (drug == "caffeine") {
+    combo = "safe and no synergy"
+  } else if (drug == "Benzodiazepines") {
+    combo = "DEADLY"
+  } else if (drug == "Opioids") {
+    combo = "DEADLY"
+  } else {
+    combo = "no drugs use"
+  }
+  return combo;
+}
+
+function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
   var alcohol = alcoholContent(num_drinks, ounces, percent);
-  var currentBAC = BACcalculator(weight, gender, alcohol, time);
+  currentBAC = BACcalculator(weight, gender, alcohol, time);
   console.log(currentBAC);
   var effects = currentEffects(currentBAC)
   console.log("current effects: " + effects)
+  var combo = drugCombo(drug)
+  console.log("current drug combo effects: " + combo)
   // print current BAC
   document.getElementById("currBAC").innerHTML = currentBAC;
   // print current effects
   document.getElementById("currEffects").innerHTML = effects;
+  // print current drug effects
+  document.getElementById("currDrugEffects").innerHTML = combo;
+  // update drunk circle
+  // var BACsize = currentBAC * 500;
+  // drunkCircle.attr("r", BACsize);
+  // figure out drunk blurriness
+  if (currentBAC < .02) {
+    defs.append("filter")
+      .attr("id", "motionFilter")
+      .attr("width", "300%")		//Increase the width of the filter region to remove blur "boundary"
+      .attr("x", "-100%") 			//Make sure the center of the "width" lies in the middle of the element
+      .append("feGaussianBlur")	//Append a filter technique
+      .attr("class", "blurValues")	//Needed to select later on
+      .attr("in", "SourceGraphic")	//Perform the blur on the applied element
+      .attr("stdDeviation", "0 0");	//Do a blur of 0 standard deviations in the horizontal and vertical direction
+  } else if (currentBAC < .05){
+    defs.append("filter")
+      .attr("id", "motionFilter")
+      .attr("width", "300%")
+      .attr("x", "-100%")
+      .append("feGaussianBlur")
+      .attr("class", "blurValues")
+      .attr("in", "SourceGraphic")
+      .attr("stdDeviation", "2 0");
+  } else if (currentBAC < .1){
+      defs.append("filter")
+      .attr("id", "motionFilter")
+      .attr("width", "300%")
+      .attr("x", "-100%")
+      .append("feGaussianBlur")
+      .attr("class", "blurValues")
+      .attr("in", "SourceGraphic")
+    	.attr("stdDeviation", "4 2");
+  } else if (currentBAC < .15){
+    defs.append("filter")
+    .attr("id", "motionFilter")
+    .attr("width", "300%")
+    .attr("x", "-100%")
+    .append("feGaussianBlur")
+    .attr("class", "blurValues")
+    .attr("in", "SourceGraphic")
+      .attr("stdDeviation", "6 4");
+  } else {
+    defs.append("filter")
+    .attr("id", "motionFilter")
+    .attr("width", "300%")
+    .attr("x", "-100%")
+    .append("feGaussianBlur")
+    .attr("class", "blurValues")
+    .attr("in", "SourceGraphic")
+      .attr("stdDeviation", "8 6");
+  }
+  //Apply the blur filter to the drunk circle element
+    drunkCircle.style("filter", "url(#motionFilter)");
 };
 
 // onclick for drink details
@@ -93,12 +191,13 @@ document.getElementById('d_submit').onclick = function(){
   new_percent = document.getElementById('percent').value;
   new_ounces = document.getElementById('ounces').value;
   new_num_drinks = document.getElementById('num_drinks').value;
+  new_drug= document.getElementById('dropdownDrug').value;
 
   console.log(new_time + "    " + new_percent + "    " + new_ounces + "   " + new_num_drinks);
 
   //  update output
   if(ensureFilled() == true) {
-    updateOutput(new_gender, new_weight, new_time, new_percent, new_ounces, new_num_drinks);
+    updateOutput(new_gender, new_weight, new_time, new_percent, new_ounces, new_num_drinks, new_drug);
   } else {
     alert("not all fields are filled");
   }
@@ -106,7 +205,17 @@ document.getElementById('d_submit').onclick = function(){
 };
 
 
-//var drunkness = d3.circle();
+var drunkCircle = svg.append("circle")
+  .attr("cx", 25)
+  .attr("cy", 25)
+  .attr("r", 30)
+  .style("fill", "red");
+
+  //
+//Always start by appending a defs (definitions) element
+var defs = svg.append("defs");
+
+
 
 //Ensures that all input fields are filled -- throws an alert if not
 function ensureFilled() {

@@ -20,7 +20,7 @@
         <div class="dropdown">
                 <p class ="interactionLabel">Choose gender</p>
                 <select id="dropdownGender"></select>
-        </div>       
+        </div>
         <p>Weight: </p><input type="text" name="weightInput" id="w_value"><br>
     </div>
 
@@ -30,16 +30,25 @@
     Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
     Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
 
+    <h2>Drug Use: </h2>
+    <div class="dropdown">
+            <p class ="interactionLabel">Drug taken: </p>
+            <select id="dropdownDrug"></select>
+    </div>
+
     <button id="d_submit">submit</button>
 
 
     <!-- drunkness values -->
-    <p>----Drunkness: </p>
-      <p>Current Blood Alcohol Content: </p>
+    <h1>Drunkness: </h1>
+      <h2>Current Blood Alcohol Content: </h2>
       <p id="currBAC"></p>
 
-      <p>You are experiencing: </p>
+      <h2>You are experiencing: </h2>
       <p id="currEffects"></p>
+
+      <h2>Drug use with alcohol is: </h2>
+      <p id="currDrugEffects"></p>
 
   </div>
 

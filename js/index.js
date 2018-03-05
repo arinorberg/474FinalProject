@@ -249,11 +249,10 @@ function ensureFilled() {
         }
 }
 
-<<<<<<< HEAD
 function limitNegatives(input) {
     if (input.value < 0) input.value = 0;
 }
-=======
+
 // rectangle to represent BAC level
 var drunkRect = svg.append("rect")
   .attr("cx", width/2)
@@ -272,4 +271,3 @@ var barImage = svg.append("image")
 
 // for gausian blur filter
 var defs = svg.append("defs");
->>>>>>> 713736ccc16c696a34d39a64d53817f12ac9d314

@@ -13,9 +13,9 @@
     <div class="jumbotron">
         <h1>Alcohol Consumption Simulator</h1>
     </div>
-    <div class="container">
+    <div class="container" id="mainContainer">
 
-    <div class="container">
+    <div class="container" id="person">
         <h2>Person: </h2>
         <div class="dropdown">
                 <p class ="interactionLabel">Gender:</p>
@@ -23,16 +23,17 @@
         </div>
         Weight: <input type="text" name="weightInput" id="w_value"><br>
     </div>
-    <div class=container>
-        <h2>Alcohol Consumption: </h2>
-        Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
-        Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
-        Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
-        Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
-    </div>
-    <img src=standard-drink.png width=400px></img>
 
-    <div class="container">
+    <div class=container id="alcohol">
+          <h2>Alcohol Consumption: </h2>
+          Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
+          Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
+          Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
+          Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
+      </div>
+      <img src=standard-drink.png width=400px id="standardDrink"></img>
+
+    <div class="container" id="drug">
         <h2>Drug Use: </h2>
         <div class="dropdown">
                 <p class ="interactionLabel">Drug taken: </p>
@@ -45,13 +46,13 @@
     <!-- drunkness values -->
     <div class="container" id="effects">
         <h2>Effects: </h2>
-        <h3>Current Blood Alcohol Content: </h3>
+        <h4>Current Blood Alcohol Content: </h4>
         <p id="currBAC"></p>
 
-        <h3>Symptoms: </h3>
+        <h4>Symptoms: </h4>
         <p id="currEffects"></p>
 
-        <h3>Drug use with alcohol: </h3>
+        <h4>Drug use with alcohol: </h4>
         <p id="currDrugEffects"></p>
     </div>
 

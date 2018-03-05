@@ -18,18 +18,19 @@
     <div class="container">
         <h2>Person: </h2>
         <div class="dropdown">
-                <p class ="interactionLabel">Choose gender</p>
+                <p class ="interactionLabel">Gender:</p>
                 <select id="dropdownGender"></select>
         </div>
         Weight: <input type="text" name="weightInput" id="w_value"><br>
     </div>
     <div class=container>
-        <h2>Drinking Behaviors: </h2>
+        <h2>Alcohol Consumption: </h2>
         Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
         Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
         Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
         Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
     </div>
+    <img src=standard-drink.png width=400px></img>
 
     <div class="container">
         <h2>Drug Use: </h2>
@@ -37,6 +38,7 @@
                 <p class ="interactionLabel">Drug taken: </p>
                 <select id="dropdownDrug"></select>
         </div>
+
         <button id="d_submit">submit</button>
     </div>
 
@@ -45,12 +47,12 @@
         <h2>Effects: </h2>
         <h3>Current Blood Alcohol Content: </h3>
         <p id="currBAC"></p>
-  
+
         <h3>Symptoms: </h3>
         <p id="currEffects"></p>
-  
-        <h3>Drug use with alcohol is: </h3>
-        <p id="currDrugEffects"></p> 
+
+        <h3>Drug use with alcohol: </h3>
+        <p id="currDrugEffects"></p>
     </div>
 
   </div>

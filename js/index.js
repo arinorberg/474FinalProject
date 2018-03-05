@@ -9,13 +9,12 @@ var svg = d3.select('body')
 .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
 // setup
 var currentBAC = 0;
 var gender;
 var gender_options = ["male", "female"];
 var drug;
-var drug_options = ["None", "Shrooms", "Cannabis", "MDMA", "Cocaine", "Caffeine", "Benzodiazepines", "Opiods"]
+var drug_options = ["None", "Caffeine", "Cannabis", "Cocaine","Opiods", "Amphetamines", "Shrooms", "MDMA", "MAOIs", "Benzodiazepines", "PCP", "SSRIs"]
 
 // update drug when selection is changed from dropdown
 d3.select("#dropdownDrug")
@@ -95,22 +94,30 @@ function BACcalculator(W, G, A, H) {
   return effects;
 }
 
-// drug combo based on : https://www.refinery29.com/drug-interactions-chart
+// drug combo based on : https://www.refinery29.com/drug-interactions-chart, http://wiki.tripsit.me/wiki/Drug_combinations#Specific_combinations_with_references_.28work_in_progress.29
 function drugCombo(drug) {
   var combo;
   if (drug == "Shrooms") {
-    combo = "safe and no synergy"
+    combo = "lower risk and no synergy"
   } else if (drug == "Cannabis") {
-    combo = "safe and no synergy"
+    combo = "lower risk and synergy"
   } else if (drug == "MDMA") {
+    combo = "Caution"
+  } else if (drug == "MAOIs") {
     combo = "UNSAFE"
   } else if (drug == "Cocaine") {
     combo = "UNSAFE"
-  } else if (drug == "caffeine") {
+  } else if (drug == "Amphetamines") {
+    combo = "Caution"
+  } else if (drug == "SSRIs") {
+    combo = "Caution"
+  } else if (drug == "Caffeine") {
     combo = "safe and no synergy"
   } else if (drug == "Benzodiazepines") {
     combo = "DEADLY"
   } else if (drug == "Opioids") {
+    combo = "DEADLY"
+  } else if (drug == "PCP") {
     combo = "DEADLY"
   } else {
     combo = "no drugs use"
@@ -121,6 +128,9 @@ function drugCombo(drug) {
 function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
   alcohol = alcoholContent(num_drinks, ounces, percent);
   currentBAC = BACcalculator(weight, gender, alcohol, time);
+  if (currentBAC < 0) {
+    currentBAC = 0;
+  }
   console.log(currentBAC);
   var effects = currentEffects(currentBAC)
   console.log("current effects: " + effects)
@@ -181,11 +191,11 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
   }
 
   // drunkness visualizations
-  var bacSize = currentBAC * 200
+  var bacSize = currentBAC * 100
     //size rectngle based on curren BAC
   drunkRect.transition().attr("height", bacSize).duration(4000);
     //Apply the blur filter to the drunk circle element
-  barImage.style("filter", "url(#motionFilter)").duration(4000);
+  barImage.style("filter", "url(#motionFilter)").duration(2000);
 };
 
 // onclick for drink details
@@ -209,24 +219,6 @@ document.getElementById('d_submit').onclick = function(){
 
 };
 
-// circle to represent drunkness
-var drunkRect = svg.append("rect")
-  .attr("cx", width/2)
-  .attr("cy", 25)
-  .attr("width", 50)
-  .attr("height", 10)
-  .style("fill", "red");
-
-var barImage = svg.append("image")
-  .attr("xlink:href", "bar.jpg")
-  .attr("cx", width/2)
-  .attr("cy", 10)
-  .attr("height", "550px")
-  .attr("width", "550px")
-
-// for gausian blur filter
-var defs = svg.append("defs");
-
 //Ensures that all input fields are filled -- throws an alert if not
 function ensureFilled() {
     if(document.getElementById('dropdownGender').value != null &&
@@ -240,3 +232,22 @@ function ensureFilled() {
             return false;
         }
 }
+
+// rectangle to represent BAC level
+var drunkRect = svg.append("rect")
+  .attr("cx", width/2)
+  .attr("cy", 25)
+  .attr("width", 50)
+  .attr("height", 10)
+  .style("fill", "red");
+
+// image to represent drunkness
+var barImage = svg.append("image")
+  .attr("xlink:href", "bar.jpg")
+  .attr("cx", width/2)
+  .attr("cy", 5)
+  .attr("height", "550px")
+  .attr("width", "550px")
+
+// for gausian blur filter
+var defs = svg.append("defs");

@@ -17,6 +17,22 @@ var gender_options = ["male", "female"];
 var drug;
 var drug_options = ["None", "Shrooms", "Cannabis", "MDMA", "Cocaine", "Caffeine", "Benzodiazepines", "Opiods"]
 
+document.getElementById('w_value').onchange = function() {
+    limitNegatives(this);
+}
+document.getElementById('time').onchange = function() {
+    limitNegatives(this);
+}
+document.getElementById('percent').onchange = function() {
+    limitNegatives(this);
+}
+document.getElementById('ounces').onchange = function() {
+    limitNegatives(this);
+}
+document.getElementById('num_drinks').onchange = function() {
+    limitNegatives(this);
+}
+
 // update drug when selection is changed from dropdown
 d3.select("#dropdownDrug")
 .selectAll("option")
@@ -229,4 +245,8 @@ function ensureFilled() {
         } else {
             return false;
         }
+}
+
+function limitNegatives(input) {
+    if (input.value < 0) input.value = 0;
 }

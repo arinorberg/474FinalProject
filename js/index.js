@@ -307,7 +307,7 @@ function updateGraph(currentBAC, time) {
     }
     console.log(BACdata);
 
-    // graph results
+    // graph results: line chart from https://bl.ocks.org/mbostock/3883245
     x.domain(d3.extent(BACdata, function(d) { return d.hour; }));
     y.domain([0,.55])
 
@@ -342,7 +342,7 @@ function updateGraph(currentBAC, time) {
         .attr('class', 'title')
         .style("font-size", "18px")
         .style("font-weight", "bold")
-        .text("BAC over the next 5 hours");
+        .text("Alcohol Metabolized over next 5 hours");
 
       var impairedLine = g.append("line")
         .style("stroke", "black")

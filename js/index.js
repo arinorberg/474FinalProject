@@ -1,39 +1,20 @@
 // layout based on: http://blockbuilder.org/Jverma/076377dd0125b1a508621441752735fc
 var margin = {top: 40, right: 50, bottom: 40, left:50};
-var width = +1000 - margin.left - margin.right;
-var height = +675 - margin.top - margin.bottom;
-
-// BAC graph
+var width = +700 - margin.left - margin.right;
+var height = +575 - margin.top - margin.bottom;
 var svg = d3.select('body')
     .append('svg')
-    .attr('width', width/2 + margin.left + margin.right)
-    .attr('height', height/2 + margin.top + margin.bottom),
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// for drunkness image
-var svg2 = d3.select('body')
-    .append('svg')
-    .attr('width', width/2)
-    .attr('height', height/2);
-
-// for graphing BAC against time
-var x = d3.scaleLinear()
-    .rangeRound([0, width/2]);
-var y = d3.scaleLinear()
-    .rangeRound([height/2, 0])
-var line = d3.line()
-    .x(function(d) { return x(d.hour); })
-    .y(function(d) { return y(d.bloodAlcConc); });
-
-
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+.append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 // setup
 var currentBAC = 0;
 var gender;
 var gender_options = ["male", "female"];
 var drug;
-var drug_options = ["None", "Caffeine", "Cannabis", "Cocaine","Opioids", "Amphetamines", "Shrooms", "MDMA", "MAOIs", "Benzodiazepines", "PCP", "SSRIs"]
-var BACdata;
+var drug_options = ["None", "Caffeine", "Cannabis", "Cocaine","Opiods", "Amphetamines", "Shrooms", "MDMA", "MAOIs", "Benzodiazepines", "PCP", "SSRIs"]
 
 document.getElementById('w_value').onchange = function() {
     limitNegatives(this);
@@ -121,10 +102,8 @@ function BACcalculator(W, G, A, H) {
        effects = "All mental, physical and sensory functions are severely impaired. Increased risk of asphyxiation from choking on vomit and of seriously injuring yourself by falls or other accidents."
    } else if (currentBAC < .30){
        effects = "STUPOR. You have little comprehension of where you are. You may pass out suddenly and be difficult to awaken."
-   } else if (currentBAC < .40){
+   } else if (currentBAC > .30){
        effects = "Coma is possible. This is the level of surgical anesthesia. "
-  } else if (currentBAC > .40){
-      effects = " Onset of coma, and possible death due to respiratory arrest."
    } else {
      effects = "no effects"
    }
@@ -173,11 +152,6 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
   console.log("current effects: " + effects)
   var combo = drugCombo(drug)
   console.log("current drug combo effects: " + combo)
-
-  updateGraph(currentBAC, time);
-
-// blur photo
-
   // print current BAC
   document.getElementById("currBAC").innerHTML = currentBAC;
   // print current effects
@@ -229,12 +203,15 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     .append("feGaussianBlur")
     .attr("class", "blurValues")
     .attr("in", "SourceGraphic")
-    .attr("stdDeviation", "8 0");
+      .attr("stdDeviation", "8 0");
   }
 
-  //Apply the blur filter to the drunk circle element
-  barImage.transition().style("filter", "url(#motionFilter)").delay(250).duration(12000);
-
+  // drunkness visualizations
+  var bacSize = currentBAC * 100
+    //size rectngle based on curren BAC
+  drunkRect.transition().attr("height", bacSize).duration(4000);
+    //Apply the blur filter to the drunk circle element
+  barImage.style("filter", "url(#motionFilter)").duration(2000);
 };
 
 // onclick for drink details
@@ -275,131 +252,21 @@ function ensureFilled() {
 function limitNegatives(input) {
     if (input.value < 0) input.value = 0;
 }
+// rectangle to represent BAC level
+var drunkRect = svg.append("rect")
+  .attr("cx", width/2)
+  .attr("cy", 25)
+  .attr("width", 50)
+  .attr("height", 10)
+  .style("fill", "red");
 
 // image to represent drunkness
-var barImage = svg2.append("image")
+var barImage = svg.append("image")
   .attr("xlink:href", "bar.jpg")
   .attr("cx", width/2)
-  .attr("cy", 50)
-  .attr("height", height/2)
-  .attr("width", width/2)
+  .attr("cy", 5)
+  .attr("height", "550px")
+  .attr("width", "550px")
 
 // for gausian blur filter
-var defs = svg2.append("defs");
-
-
-//
-function updateGraph(currentBAC, time) {
-    BACdata = [
-            { "hour": 0, "bloodAlcConc": currentBAC }
-        ];
-    // calculate & BAC for next 5 hours
-    var bac = currentBAC;
-    var currhr = 0;
-    for (i = 0; i < 10; i++) {
-      // metabolize at .015 BAC per hour: https://www.lifeloc.com/measurement
-      currhr = currhr + .5;
-      bac = bac - .015;
-      if (bac < 0) {
-        bac = 0;
-      }
-      BACdata.push({ "hour": currhr, "bloodAlcConc": bac});
-    }
-    console.log(BACdata);
-
-    // graph results: line chart from https://bl.ocks.org/mbostock/3883245
-    x.domain(d3.extent(BACdata, function(d) { return d.hour; }));
-    y.domain([0,.55])
-
-    d3.select("g").remove();
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    g.append("g")
-      .attr("transform", "translate(0," + height/2 + ")")
-      .call(d3.axisBottom(x))
-      .append("text")
-      .attr("fill", "#000")
-      .attr("x", width/2 - 6)
-      .attr("dx", "0.71em")
-      .attr("text-anchor", "end")
-      .text("Hour");
-
-    g.append("g")
-      .call(d3.axisLeft(y))
-      .append("text")
-      .attr("fill", "#000")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text("BAC");
-
-      // title
-      g.append("text")
-        .attr("x", (width / 4))
-        .attr("y", 0 - (margin.top / 2))
-        .attr("text-anchor", "middle")
-        .attr('class', 'title')
-        .style("font-size", "18px")
-        .style("font-weight", "bold")
-        .text("Alcohol Metabolized over next 5 hours");
-
-      var impairedLine = g.append("line")
-        .style("stroke", "black")
-        .attr("x1", x(0))
-        .attr("x2", x(5))
-        .attr("y1", y(.08))
-        .attr("y2", y(.08));
-
-  var path = g.append("path")
-      .datum(BACdata)
-      .attr("fill", "none")
-      .attr("stroke", "red")
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
-      .attr("stroke-width", 3)
-      .attr("d", line);
-
-      // animate path
-      var totalLength = path.node().getTotalLength();
-      path
-        .attr("stroke-dasharray", totalLength + " " + totalLength)
-        .attr("stroke-dashoffset", totalLength)
-        .transition()
-        .duration(13000)
-        .attr("stroke-dashoffset", 0);
-
-      // // update table
-      // tabulate(BACdata, ['hour', 'bloodAlcConc']); // 2 column table
-
-}
-
-
-  // function tabulate(data, columns) {
-	// 	var table = d3.select('svg').append('table')
-	// 	var thead = table.append('thead')
-	// 	var	tbody = table.append('tbody');
-  //
-	// 	// append the header row
-	// 	thead.append('tr')
-	// 	  .selectAll('th')
-	// 	  .data(columns).enter()
-	// 	  .append('th')
-	// 	    .text(function (column) { return column; });
-	// 	// create a row for each object in the data
-	// 	var rows = tbody.selectAll('tr')
-	// 	  .data(data)
-	// 	  .enter()
-	// 	  .append('tr');
-	// 	// create a cell in each row for each column
-	// 	var cells = rows.selectAll('td')
-	// 	  .data(function (row) {
-	// 	    return columns.map(function (column) {
-	// 	      return {column: column, value: row[column]};
-	// 	    });
-	// 	  })
-	// 	  .enter()
-	// 	  .append('td')
-	// 	   .text(function (d) { return d.value; });
-	//   return table;
-	// }
+var defs = svg.append("defs");

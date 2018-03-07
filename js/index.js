@@ -4,14 +4,14 @@ var width = +1000 - margin.left - margin.right;
 var height = +675 - margin.top - margin.bottom;
 
 // for BAC graph
-var svg = d3.select('body')
+var svg = d3.select('#BACresults')
     .append('svg')
     .attr('width', width/2 + margin.left + margin.right)
     .attr('height', height/2 + margin.top + margin.bottom),
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // for drunkness image
-var svg2 = d3.select('body')
+var svg2 = d3.select('#drunknessResults')
     .append('svg')
     .attr('width', width/2)
     .attr('height', height/2);
@@ -317,7 +317,7 @@ function updateGraph(currentBAC, time) {
       .call(d3.axisBottom(x))
       .append("text")
       .attr("fill", "#000")
-      .attr("x", width/2 - 6)
+      .attr("x", width/2 - 4)
       .attr("dx", "0.71em")
       .attr("text-anchor", "end")
       .text("Hour");
@@ -330,8 +330,8 @@ function updateGraph(currentBAC, time) {
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("BAC");
-    // draw title
+      .text("BAC %");
+    // add title
     g.append("text")
       .attr("x", (width / 4))
       .attr("y", 0 - (margin.top / 2))
@@ -339,14 +339,22 @@ function updateGraph(currentBAC, time) {
       .attr('class', 'title')
       .style("font-size", "18px")
       .style("font-weight", "bold")
-      .text("Alcohol Metabolized over next 5 hours");
+      .text("BAC over next 5 hours");
     // draw line for legally imparied threshold
     var impairedLine = g.append("line")
-      .style("stroke", "black")
+      .style("stroke", "green")
       .attr("x1", x(0))
       .attr("x2", x(5))
       .attr("y1", y(.08))
       .attr("y2", y(.08));
+    // add label for legal limit threshold line
+    g.append("text")
+      .attr("x", (width / 2) - 110)
+      .attr("y", height / 2 + 35)
+      .attr("text-anchor", "middle")
+      .attr('class', 'title')
+      .style("font-size", "10px")
+      .text("*green line represents .08% BAC Legal Limit");
 
     //draw BAC line
     var path = g.append("path")
@@ -357,13 +365,14 @@ function updateGraph(currentBAC, time) {
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("d", line);
-      // animate path
-      var totalLength = path.node().getTotalLength();
-      path
-        .attr("stroke-dasharray", totalLength + " " + totalLength)
-        .attr("stroke-dashoffset", totalLength)
-        .transition()
-        .duration(13000)
-        .attr("stroke-dashoffset", 0);
+    // animate path
+    var totalLength = path.node().getTotalLength();
+    path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+      .delay(300)
+      .duration(13000)
+      .attr("stroke-dashoffset", 0);
 
 }

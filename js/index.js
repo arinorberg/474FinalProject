@@ -13,8 +13,8 @@ var svg = d3.select('#BACresults')
 // for drunkness image
 var svg2 = d3.select('#drunknessResults')
     .append('svg')
-    .attr('width', width/2)
-    .attr('height', height/2);
+    .attr('width', width/2.5)
+    .attr('height', height/2.5);
 
 // for graphing BAC against time
 var x = d3.scaleLinear()
@@ -296,10 +296,10 @@ function limitNegatives(input) {
 // image to represent drunkness
 var barImage = svg2.append("image")
   .attr("xlink:href", "bar.jpg")
-  .attr("cx", width/2)
+  .attr("cx", width/2.5)
   .attr("cy", 50)
-  .attr("height", height/2)
-  .attr("width", width/2)
+  .attr("height", height/2.5)
+  .attr("width", width/2.5)
 
 // for gausian blur filter
 var defs = svg2.append("defs");

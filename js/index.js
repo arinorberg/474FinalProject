@@ -101,34 +101,48 @@ function BACcalculator(W, G, A, H) {
  // BAC effects based on: http://www.brad21.org/effects_at_specific_bac.html
  function currentEffects(currentBAC) {
    var effects;
+   var hangover;
    if (currentBAC < .02) {
      effects = "no significant effects"
    } else if (currentBAC < .03){
-       effects = "No loss of coordination, slight euphoria and loss of shyness. Depressant effects are not apparent. Mildly relaxed and maybe a little lightheaded."
+       effects = "No loss of coordination, slight euphoria and loss of shyness. Depressant effects are not apparent. Mildly relaxed and maybe a little lightheaded.";
+       hangover = "Tomorrow: hangover free. Almost zero chance of a hangover; should be able to get plenty done tomorrow.";
    } else if (currentBAC < .06){
-         effects = "Feeling of well-being, relaxation, lower inhibitions, sensation of warmth. Euphoria. Some minor impairment of reasoning and memory, lowering of caution. Your behavior may become exaggerated and emotions intensified (Good emotions are better, bad emotions are worse)"
+         effects = "Feeling of well-being, relaxation, lower inhibitions, sensation of warmth. Euphoria. Some minor impairment of reasoning and memory, lowering of caution. Your behavior may become exaggerated and emotions intensified (good emotions are better, bad emotions are worse)";
+         hangover = "Tomorrow: no hangover ~0% chance of a hangover if you’ve been hydrating between drinks; should be able to get plenty done.";
+
    } else if (currentBAC < .09){
-       effects = "Slight impairment of balance, speech, vision, reaction time, and hearing. Euphoria. Judgment and self-control are reduced, and caution, reason and memory are impaired, .08 is legally impaired and it is illegal to drive at this level. You will probably believe that you are functioning better than you really are."
+       effects = "Slight impairment of balance, speech, vision, reaction time, and hearing. Euphoria. Judgment and self-control are reduced, and caution, reason and memory are impaired, .08 is legally impaired and it is illegal to drive at this level. You will probably believe that you are functioning better than you really are.";
+       hangover = "Tomorrow: hangover possible Some chance of a hangover; hydrating between drinks will help. Likely a little slow getting things done in the AM.";
    } else if (currentBAC < .125){
-       effects = "Significant impairment of motor coordination and loss of good judgment. Speech may be slurred; balance, vision, reaction time and hearing will be impaired. Euphoria."
+       effects = "Significant impairment of motor coordination and loss of good judgment. Speech may be slurred; balance, vision, reaction time and hearing will be impaired. Euphoria.";
+       hangover = "Tomorrow: hangover likely. Decreased REM sleep overnight = a bit tired and less productive. Hydration between drinks (not right before bed) will help.";
    } else if (currentBAC < .15){
-       effects = "Gross motor impairment and lack of physical control. Blurred vision and major loss of balance. Euphoria is reduced and dysphoria (anxiety, restlessness) is beginning to appear. Judgment and perception are severely impaired."
+       effects = "Gross motor impairment and lack of physical control. Blurred vision and major loss of balance. Euphoria is reduced and dysphoria (anxiety, restlessness) is beginning to appear. Judgment and perception are severely impaired.";
+       hangover = "Tomorrow: hangover likely. Decreased REM sleep overnight = a bit tired and less productive. Hydration between drinks (not right before bed) will help.";
    } else if (currentBAC < .19){
-       effects = "Dysphoria predominates, nausea may appear. The drinker has the appearance of a \"sloppy drunk.\""
+       effects = "Dysphoria predominates, nausea may appear. The drinker has the appearance of a \"sloppy drunk.\"";
+       hangover = "Tomorrow: serious hangover. Probably sick and headachy. No REM sleep at all = not very sharp; studying will be a struggle. Hydration between drinks (not right before bed) will help";
    } else if (currentBAC < .20){
-       effects = "Feeling dazed, confused or otherwise disoriented. May need help to stand or walk. If you injure yourself you may not feel the pain. Some people experience nausea and vomiting at this level. The gag reflex is impaired and you can choke if you do vomit. Blackouts are likely at this level so you may not remember what has happened."
+       effects = "Feeling dazed, confused or otherwise disoriented. May need help to stand or walk. If you injure yourself you may not feel the pain. Some people experience nausea and vomiting at this level. The gag reflex is impaired and you can choke if you do vomit. Blackouts are likely at this level so you may not remember what has happened.";
+       hangover = "Tomorrow: serious hangover. Probably sick and headachy. No REM sleep at all = not very sharp; studying will be a struggle. Hydration between drinks (not right before bed) will help";
    } else if (currentBAC < .25){
-       effects = "All mental, physical and sensory functions are severely impaired. Increased risk of asphyxiation from choking on vomit and of seriously injuring yourself by falls or other accidents."
+       effects = "All mental, physical and sensory functions are severely impaired. Increased risk of asphyxiation from choking on vomit and of seriously injuring yourself by falls or other accidents.";
+       hangover = "Tomorrow: hangover agony. Debilitating headache/nausea and fervent regret almost certain. Productivity of any sort unlikely until mid-afternoon.";
    } else if (currentBAC < .30){
-       effects = "STUPOR. You have little comprehension of where you are. You may pass out suddenly and be difficult to awaken."
+       effects = "STUPOR. You have little comprehension of where you are. You may pass out suddenly and be difficult to awaken.";
+       hangover = "Tomorrow: hangover agony. Debilitating headache/nausea and fervent regret almost certain. Productivity of any sort unlikely until mid-afternoon.";
    } else if (currentBAC < .40){
-       effects = "Coma is possible. This is the level of surgical anesthesia. "
+       effects = "Coma is possible. This is the level of surgical anesthesia.";
+       hangover = "Tomorrow: bigger problems. A debilitating hangover is only the start. Details will depend on time of hospital release.";
   } else if (currentBAC > .40){
-      effects = " Onset of coma, and possible death due to respiratory arrest."
+      effects = "Onset of coma, and possible death due to respiratory arrest.";
+      hangover = "Tomorrow: hopefully. In the event of survival, hangover or not will depend on the amount and type of anesthesia administered in the hospital.";
    } else {
      effects = "no effects"
+     hangover = "no chance of hangover"
    }
-  return effects;
+  return {"effects": effects, "hangover": hangover};
 }
 
 // drug combo based on : https://www.refinery29.com/drug-interactions-chart, http://wiki.tripsit.me/wiki/Drug_combinations#Specific_combinations_with_references_.28work_in_progress.29
@@ -169,21 +183,24 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     currentBAC = 0;
   }
   console.log(currentBAC);
-  var effects = currentEffects(currentBAC)
-  console.log("current effects: " + effects)
-  var combo = drugCombo(drug)
-  console.log("current drug combo effects: " + combo)
-
-  updateGraph(currentBAC, time);
-
-// blur photo
+  effhang = currentEffects(currentBAC);
+  console.log("effhang" + effhang.hangover)
+  console.log("current effects: " + effhang.effects);
+  console.log("hangover: " + effhang.hangover);
+  var combo = drugCombo(drug);
+  console.log("current drug combo effects: " + combo);
 
   // print current BAC
   document.getElementById("currBAC").innerHTML = currentBAC;
   // print current effects
-  document.getElementById("currEffects").innerHTML = effects;
+  document.getElementById("currEffects").innerHTML = effhang.effects;
+  // print hangover effects
+  document.getElementById("hangover").innerHTML = effhang.hangover;
   // print current drug effects
   document.getElementById("currDrugEffects").innerHTML = combo;
+
+  updateGraph(currentBAC, time);
+
   // figure out drunk blurriness
   if (currentBAC < .02) {
     defs.append("filter")
@@ -234,7 +251,6 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
 
   //Apply the blur filter to the drunk circle element
   barImage.transition().style("filter", "url(#motionFilter)").delay(250).duration(12000);
-
 };
 
 // onclick for drink details

@@ -103,6 +103,7 @@ function BACcalculator(W, G, A, H) {
    var hangover;
    if (currentBAC < .02) {
      effects = "no significant effects"
+     hangover = "no chance of hangover"
    } else if (currentBAC < .03){
        effects = "No loss of coordination, slight euphoria and loss of shyness. Depressant effects are not apparent. Mildly relaxed and maybe a little lightheaded.";
        hangover = "Tomorrow: hangover free. Almost zero chance of a hangover; should be able to get plenty done tomorrow.";

@@ -8,16 +8,20 @@ h4 {
   font-size: 1rem;
 }
 .jumbotron {
-    padding: 0.5em 0.6em;
-    h1 {
-      font-size: 2em;
-    }
-    p {
-      font-size: 1.2em;
-      .btn {
-          padding: 0.5em;
-      }
-    }
+  padding: 0.5em 0.6em;
+  height: 10%;
+  overflow: auto;
+}
+
+h1 {
+  font-size: 2em;
+}
+p {
+  font-size: 1.2em;
+}
+
+.btn {
+  padding: 0.5em;
 }
 
 body {
@@ -30,13 +34,15 @@ body {
   width: 100%;
 }
 
-#scroll  {
-}
-
 #effects {
-  /* width: 45%;
-  float: right;
-  position: absolute; */
+  position: fixed;
+  left: 50%;
+  top: 10%;
+  width: 45%;
+  max-height: 85%;
+  overflow: scroll;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 #dropdownGender, #dropdownDrug {
@@ -52,4 +58,13 @@ body {
   border: black solid 1px;
   padding: 10px;
   border-radius: 15px;
+}
+
+#scroll {
+  position: fixed;
+  width: 45%;
+  padding-left: 0px;
+  padding-right: 0px;
+  max-height: 85%;
+  overflow: auto;
 }

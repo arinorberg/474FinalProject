@@ -2,78 +2,68 @@
 <head>
     <meta charset="UTF-8">
     <title>474 Final Project</title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css"></link>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-
-    <div class="jumbotron">
-        <h1>Alcohol Consumption Explorable Explanation</h1>
-        <p>Made wholesomely by Trevor Bruecher, Ari Norberg and Jillian Honrade</p>
-    </div>
-    <div class="container" id="mainContainer">
-
+  <div class="jumbotron">
+      <h1>Alcohol Consumption Explorable Explanation</h1>
+      <p>Made wholesomely by Trevor Bruecher, Ari Norberg and Jillian Honrade</p>
+  </div>
+  <div class="container" id="mainContainer">
     <div class="container" id="scroll">
-
       <div class="container" id="person">
           <h2>Person: </h2>
           <div class="dropdown">
-                  <p class ="interactionLabel">Gender:</p>
-                  <select id="dropdownGender"></select>
+            <p class ="interactionLabel">Gender:</p>
+            <select id="dropdownGender"></select>
           </div>
           Weight: <input type="text" name="weightInput" id="w_value"><br>
       </div>
-
       <div class=container id="alcohol">
-            <h2>Alcohol Consumption: </h2>
-            Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
-            Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
-            Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
-            Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
-        </div>
-        <img src=standard-drink.png width=400px id="standardDrink"></img>
-
+        <h2>Alcohol Consumption: </h2>
+        Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks"><br>
+        Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces"><br>
+        Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent"><br>
+        Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time"><br>
+      </div>
+      <img src=standard-drink.png width=350 id="standardDrink" />
       <div class="container" id="drug">
           <h2>Drug Use: </h2>
           <div class="dropdown">
-                  <p class ="interactionLabel">Drug taken: </p>
-                  <select id="dropdownDrug"></select>
+            <p class ="interactionLabel">Drug taken: </p>
+            <select id="dropdownDrug"></select>
           </div>
-
           <button id="d_submit">submit</button>
       </div>
-
     </div>
-
     <!-- drunkness values -->
     <div class="container" id="effects">
-        <div class="container" id="BACresults">
-          <h2>Effects: </h2>
-          <h4>Current Blood Alcohol Content: </h4>
-          <p id="currBAC"></p>
-        </div>
+      <div class="container" id="BACresults">
+        <h2>Effects: </h2>
+        <h4>Current Blood Alcohol Content: </h4>
+        <p id="currBAC"></p>
+      </div>
 
-        <div class="container" id="drunknessResults">
-          <h4>Current Symptoms: </h4>
-          <p id="currEffects"></p>
-        </div>
+      <div class="container" id="drunknessResults">
+        <h4>Current Symptoms: </h4>
+        <p id="currEffects"></p>
+      </div>
 
-        <div class="container" id="hangoverResults">
-          <h4>Hangover: </h4>
-          <p id="hangover"></p>
-        </div>
+      <div class="container" id="hangoverResults">
+        <h4>Hangover: </h4>
+        <p id="hangover"></p>
+      </div>
 
-        <div class="container" id="drunknessResults">
-          <h4>Drug use with alcohol: </h4>
-          <p id="currDrugEffects"></p>
-        </div>
+      <div class="container" id="drugResults">
+        <h4>Drug use with alcohol: </h4>
+        <p id="currDrugEffects"></p>
+      </div>
     </div>
-
   </div>
-
 
   <!-- D3 -->
   <script src="https://d3js.org/d3-color.v1.min.js"></script>

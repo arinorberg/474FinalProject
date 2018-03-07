@@ -1,7 +1,42 @@
 /* style */
 
 h2 {
-  font-size: .5em;
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+.jumbotron {
+    padding: 0.5em 0.6em;
+    h1 {
+      font-size: 2em;
+    }
+    p {
+      font-size: 1.2em;
+      .btn {
+          padding: 0.5em;
+      }
+    }
+}
+
+body {
+  font-size: .5rem;
+}
+
+#mainContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#scroll  {
+}
+
+#effects {
+  /* width: 45%;
+  float: right;
+  position: absolute; */
 }
 
 #dropdownGender, #dropdownDrug {
@@ -17,13 +52,4 @@ h2 {
   border: black solid 1px;
   padding: 10px;
   border-radius: 15px;
-}
-
-#alcohol {
-  width: 50%;
-  float: left;
-}
-#standardDrink {
-  margin-right: 100px;
-  float: right;
 }

@@ -28,6 +28,18 @@ body {
   font-size: .5rem;
 }
 
+.image {
+  text-align: center;
+}
+
+.ibox {
+  padding: 10px;
+}
+
+input, select {
+  float: right;
+}
+
 #mainContainer {
   display: flex;
   justify-content: space-between;

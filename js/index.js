@@ -33,6 +33,7 @@ var drug;
 var drug_options = ["None", "Caffeine", "Cannabis", "Cocaine","Opioids", "Amphetamines", "Shrooms", "MDMA", "MAOIs", "Benzodiazepines", "PCP", "SSRIs"]
 var BACdata;
 
+document.getElementById('BACresults').style.display = "none";
 document.getElementById('w_value').onchange = function() {
     limitNegatives(this);
 }
@@ -256,6 +257,7 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
 
 // update results when submit button is clicked
 document.getElementById('d_submit').onclick = function(){
+  document.getElementById('BACresults').style.display = "initial";
   new_gender = document.getElementById('dropdownGender').value;
   new_weight = document.getElementById('w_value').value;
   new_time = document.getElementById('time').value;

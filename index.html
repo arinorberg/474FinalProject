@@ -15,49 +15,100 @@
   </div>
   <div class="container" id="mainContainer">
     <div class="container" id="scroll">
-      <div class="container" id="person">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, ullam architecto? Aspernatur cum odio, maiores mollitia hic at incidunt molestias ex fugit obcaecati sint soluta nemo. Doloremque dolor amet minima.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur culpa molestiae rerum sit, laborum autem? Porro unde eveniet laboriosam exercitationem ipsum cupiditate neque veritatis dicta eum? Sequi placeat possimus aperiam?
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui est, praesentium aperiam similique corporis omnis nobis tempora consequuntur voluptates debitis ex aliquid amet, quas, dolor fugit officiis architecto neque provident?Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ratione aut eum! Architecto ea esse cumque delectus reiciendis totam iste hic, error asperiores neque et fugiat quam rerum enim non?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam sit animi voluptas nulla architecto minima eius obcaecati fuga, ex id corrupti. Vitae, repellat. Eum perspiciatis nostrum, distinctio ipsam debitis ducimus?
-        </p>
 
+        <div class="container" id="intro">
+            <!-- intro info -->
+            <h2>The Problem: </h2>
+              <p> This Explorable Explanation focuses on the misunderstanding surrounding alcohol consumption and the negative consequences that can have on society. Many people do not fully understand the effects alcohol can have on them - particularly, how much alcohol is a safe amount to consume in a given time frame and for their specific body type, and whether or not they should take certain drugs with alcohol. This can lead to a multitude of consequences for the person and those around them, and can range in severity from minor to deadly.
+              </p>
+            <h4>The Extent.</h4>
+              <p> Alcohol Consumption is a prevalent part of American society. In just the last month, 56% of all adults (18+) have reported they have consumed alcohol, and 27% have reported they partook in binge drinking. Many Americans are engaging in alcohol consumption, but not all of them are doing so in a safe, responsible and well-informed way.
+              </p>
+            <h4>The Impact.</h4>
+              <p>There are 88,000 alcohol related deaths in the US every year; 2000 of them are caused by alcohol poisoning alone. This makes alcohol the third leading cause of preventable death in the county. In addition to the fatal outcomes, alcohol consumption also caused many other risks to the body such injury, immediate and long-term health effects and increases in substance abuse and addiction. There are also many social and economical effects alcohol consumption can have on a person and the society as a whole.
+              </p>
+            <h4>Drugs and Alcohol.</h4>
+              <p>Awareness surrounding the potentially dangerous consequences of mixing drugs and alcohol is also a major aspect of this problem. A recent medical study found that from 1983 to 2004, deaths caused by CDI (combined drug intoxication) rose 360.5%. Many people are dying from accidentally taking certain drugs with alcohol.
+              </p>
+
+            <h2>Motivation: </h2>
+              <p> We hope that this explorative explanation will be used to help people make safer and more informed choices when drinking, and ultimately prevent and reduce the negative consequences related to alcohol consumption. Both on a small scale, such as to help people avoid adverse drinking symptoms and hangovers. As well as on a large scale, such as avoiding unnecessary deaths and injury. This tool is also meant for those who don’t or can’t drink, as everyone can benefit from being more aware and more informed. Overall, we hope to promote a healthier and more responsible culture around alcohol consumption.
+              </p>
+      </div>
+
+
+      <div class="container" id="alcohol">
+
+        <div class="container" id="person">
+          <h2>About BAC (Blood Alcohol Content): </h2>
+            <p> Blood Alcohol Content is a metric for measuring alcohol intoxication. This unit of measure is typically calculated in mass by volume, in which 1% BAC is equivalent to 1% of a person’s blood concentration (1g of alcohol per 100g of blood in a person’s body). As BAC rises so does a person’s impairment. In the United States, the Legal Limit (alcohol level at which a person is considered legally impaired) is .08% BAC. A BAC of over .30% is considered life-threatening, in a person will be in high risk of death by severe alcohol poisoning.
+            </p>
 
           <h2>Person: </h2>
+          <p> The effects of alcohol can differ across each individual. Multiple factors such as gender, age, body size and composition, ethnicity, genetics, food and even a person’s mood can influence their level of drunkness. In order to cater the results to a specific person’s body, please input their gender and weight (lbs).
+          </p>
+
+          <!-- person inputs-->
           <div class="ibox">
             Gender: <select id="dropdownGender"></select>
           </div>
           <div class="ibox">
             Weight: <input type="text" name="weightInput" id="w_value">
           </div>
-      </div>
-      <div class=container id="alcohol">
-        <h2>Alcohol Consumption: </h2>
-        <div class="ibox">
-          Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks">
+
+          <h4> The BAC was calculated using this common formula: % BAC = (A x 5.14 / W x r) – .015 x H </h4>
+            <p> A = liquid ounces of alcohol consumed<br />
+            W = a person’s weight in pounds<br />
+            r = a gender constant of alcohol distribution (.73 for men and .66 for women)*<br />
+            H = hours elapsed since drinking commenced</p>
+
         </div>
-        <div class="ibox">
-          Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces">
+        <div class=container id="BAC">
+          <h2>Alcohol Consumption: </h2>
+            <p> A “Standard Drink” is a unit of measure of that is used to compare the alcohol consumption between varying beverage types. The volume and concentration of alcohol may differ across beverages, but the amount of alcohol it contains (and the general level of drunkness it produces) should be the same. For the United States, a standard drink contains about 14 grams of alcohol. See image below for the standard drink information for beers, malt liquors, wines and spirits.
+            </p>
+
+            <div class="image">
+              <img src=standard-drink.png width=350 id="standardDrink" />
+            </div>
+
+            <pr> To calculate the amount of alcohol consumption you want to simulate in the results, please input the number of drinks the person consumed, the number of fluid ounces in each drink, the percentage of alcohol in each drink and the amount of time spent in drinking the drink(s) in hours.
+            </p>
+
+          <!-- alchohol inputs-->
+          <div class="ibox">
+            Number of Drinks: <input type="number" name="numDrinksInput" id="num_drinks">
+          </div>
+          <div class="ibox">
+            Number of ounces in each drink: <input type="number" name="ouncesInput" id="ounces">
+          </div>
+          <div class="ibox">
+            Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent">
+          </div>
+          <div class="ibox">
+            Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time">
+          </div>
         </div>
-        <div class="ibox">
-          Percentage of alcohol in drink: <input type="number" name="percentageInput" id="percent">
-        </div>
-        <div class="ibox">
-          Time spent drinking (hours): <input type="number" name="numDrinksInput" id="time">
-        </div>
-      </div>
-      <div class="image">
-        <img src=standard-drink.png width=350 id="standardDrink" />
       </div>
       <div class="container" id="drug">
           <h2>Drug Use: </h2>
+
+          <p> While alcohol is often associated as a “fun” and “lively” drug that helps boosts a person’s energy and personality, it is actually classified as a depressant. Meaning that it slows down vital functions—resulting in slurred speech, unsteady movement, disturbed perceptions and an inability to react quickly. When taken with other drugs, the interact in the body can be dangerous and potentially fatal. To find out potential risks associated with drug and alcohol combination, please select one of the drug options below. </p>
+
+          <!-- drug inputs-->
           <div class="ibox">
             Drug taken: <select id="dropdownDrug"></select>
           </div>
+
+          <p> Note: These results do not promote or endorse any drug and alcohol combination, and all should be regarded with caution. </p>
+
           <button id="d_submit">submit</button>
       </div>
     </div>
-    <!-- drunkness values -->
+    </div>
+
+
+    <!-- results-->
     <div class="container" id="effects">
       <div class="container" id="bacbox">
         <h2>Effects: </h2>

@@ -13,8 +13,8 @@ var svg = d3.select('#BACresults')
 // for drunkness image
 var svg2 = d3.select('#drunknessResults')
     .append('svg')
-    .attr('width', width/2.5)
-    .attr('height', height/2.5);
+    .attr('width', width/2)
+    .attr('height', height/2);
 
 // for graphing BAC against time
 var x = d3.scaleLinear()
@@ -33,7 +33,6 @@ var drug;
 var drug_options = ["None", "Caffeine", "Cannabis", "Cocaine","Opioids", "Amphetamines", "Shrooms", "MDMA", "MAOIs", "Benzodiazepines", "PCP", "SSRIs"]
 var BACdata;
 
-document.getElementById('BACresults').style.display = "none";
 document.getElementById('w_value').onchange = function() {
     limitNegatives(this);
 }
@@ -52,30 +51,30 @@ document.getElementById('num_drinks').onchange = function() {
 
 // update drug when selection is changed from dropdown
 d3.select("#dropdownDrug")
-.selectAll("option")
-.data(drug_options)
-.enter()
-.append("option")
-.attr("value", function(option) { return option; })
-.property("selected", function(d){ return d === drug})
-.text(function(option) { return option; });
-var dropDown = d3.select("#dropdownDrug");
-dropDown.on("change", function() {
-  drug = d3.event.target.value;
+  .selectAll("option")
+  .data(drug_options)
+  .enter()
+  .append("option")
+  .attr("value", function(option) { return option; })
+  .property("selected", function(d){ return d === drug})
+  .text(function(option) { return option; });
+  var dropDown = d3.select("#dropdownDrug");
+  dropDown.on("change", function() {
+    drug = d3.event.target.value;
 });
 
 // update gender when selection is changed from dropdown
 d3.select("#dropdownGender")
-.selectAll("option")
-.data(gender_options)
-.enter()
-.append("option")
-.attr("value", function(option) { return option; })
-.property("selected", function(d){ return d === gender})
-.text(function(option) { return option; });
-var dropDown = d3.select("#dropdownGender");
-dropDown.on("change", function() {
-  gender = d3.event.target.value;
+  .selectAll("option")
+  .data(gender_options)
+  .enter()
+  .append("option")
+  .attr("value", function(option) { return option; })
+  .property("selected", function(d){ return d === gender})
+  .text(function(option) { return option; });
+  var dropDown = d3.select("#dropdownGender");
+  dropDown.on("change", function() {
+    gender = d3.event.target.value;
 });
 
 // alcohol content calculator
@@ -98,23 +97,23 @@ function BACcalculator(W, G, A, H) {
  return BAC;
  }
 
- // BAC effects based on: http://www.brad21.org/effects_at_specific_bac.html
+ // BAC symptoms: http://www.brad21.org/effects_at_specific_bac.html
+ // hangover: https://aod.yalecollege.yale.edu/info-resources/bac-calculator
  function currentEffects(currentBAC) {
    var effects;
    var hangover;
    if (currentBAC < .02) {
      effects = "no significant effects"
-     hangover = "no chance of hangover"
    } else if (currentBAC < .03){
        effects = "No loss of coordination, slight euphoria and loss of shyness. Depressant effects are not apparent. Mildly relaxed and maybe a little lightheaded.";
        hangover = "Tomorrow: hangover free. Almost zero chance of a hangover; should be able to get plenty done tomorrow.";
    } else if (currentBAC < .06){
          effects = "Feeling of well-being, relaxation, lower inhibitions, sensation of warmth. Euphoria. Some minor impairment of reasoning and memory, lowering of caution. Your behavior may become exaggerated and emotions intensified (good emotions are better, bad emotions are worse)";
-         hangover = "Tomorrow: no hangover ~0% chance of a hangover if you’ve been hydrating between drinks; should be able to get plenty done.";
+         hangover = "Tomorrow: no hangover. ~0% chance of a hangover if you’ve been hydrating between drinks; should be able to get plenty done.";
 
    } else if (currentBAC < .09){
        effects = "Slight impairment of balance, speech, vision, reaction time, and hearing. Euphoria. Judgment and self-control are reduced, and caution, reason and memory are impaired, .08 is legally impaired and it is illegal to drive at this level. You will probably believe that you are functioning better than you really are.";
-       hangover = "Tomorrow: hangover possible Some chance of a hangover; hydrating between drinks will help. Likely a little slow getting things done in the AM.";
+       hangover = "Tomorrow: hangover possible. Some chance of a hangover; hydrating between drinks will help. Likely a little slow getting things done in the AM.";
    } else if (currentBAC < .125){
        effects = "Significant impairment of motor coordination and loss of good judgment. Speech may be slurred; balance, vision, reaction time and hearing will be impaired. Euphoria.";
        hangover = "Tomorrow: hangover likely. Decreased REM sleep overnight = a bit tired and less productive. Hydration between drinks (not right before bed) will help.";
@@ -141,7 +140,7 @@ function BACcalculator(W, G, A, H) {
       hangover = "Tomorrow: hopefully. In the event of survival, hangover or not will depend on the amount and type of anesthesia administered in the hospital.";
    } else {
      effects = "no effects"
-     hangover = "no chance of hangover"
+     hangover = "Tomorrow: no hangover."
    }
   return {"effects": effects, "hangover": hangover};
 }
@@ -252,12 +251,11 @@ function updateOutput(gender, weight, time, percent, ounces, num_drinks, drug) {
     .attr("stdDeviation", "8 0");
   }
   //Apply the blur filter to the drunk circle element
-  barImage.transition().style("filter", "url(#motionFilter)").delay(250).duration(12000);
+  barImage.transition().style("filter", "url(#motionFilter)").delay(1450).duration(12000);
 };
 
 // update results when submit button is clicked
 document.getElementById('d_submit').onclick = function(){
-  document.getElementById('BACresults').style.display = "initial";
   new_gender = document.getElementById('dropdownGender').value;
   new_weight = document.getElementById('w_value').value;
   new_time = document.getElementById('time').value;
@@ -296,10 +294,10 @@ function limitNegatives(input) {
 // image to represent drunkness
 var barImage = svg2.append("image")
   .attr("xlink:href", "bar.jpg")
-  .attr("cx", width/2.5)
+  .attr("cx", width/2)
   .attr("cy", 50)
-  .attr("height", height/2.5)
-  .attr("width", width/2.5)
+  .attr("height", height/2)
+  .attr("width", width/2)
 
 // for gausian blur filter
 var defs = svg2.append("defs");
@@ -353,12 +351,11 @@ function updateGraph(currentBAC, time) {
       .text("BAC %");
     // add title
     g.append("text")
-      .attr("x", (width / 4))
+      .attr("x", width/4)
       .attr("y", 0 - (margin.top / 2))
       .attr("text-anchor", "middle")
       .attr('class', 'title')
-      .style("font-size", "18px")
-      .style("font-weight", "bold")
+      .style("font-size", "16px")
       .text("BAC over next 5 hours");
     // draw line for legally imparied threshold
     var impairedLine = g.append("line")
@@ -395,4 +392,21 @@ function updateGraph(currentBAC, time) {
       .duration(13000)
       .attr("stroke-dashoffset", 0);
 
+}
+
+// for collabsible paragraphs: https://www.w3schools.com/howto/howto_js_collapsible.asp
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
 }

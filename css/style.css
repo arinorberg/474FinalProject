@@ -63,13 +63,11 @@ input, select {
 }
 
 #effects {
-  margin-top: 20px;
   margin-bottom: 20px;
   position: fixed;
   left: 50%;
-  top: 10%;
   width: 45%;
-  max-height: 85%;
+  max-height: 75%;
   overflow: scroll;
   padding-left: 0px;
   padding-right: 0px;
@@ -86,7 +84,6 @@ input, select {
 }
 
 #effects {
-  margin-top: 70px;
   padding: 10px;
   background-color: #eee;
 }
@@ -97,7 +94,8 @@ input, select {
   width: 40%;
   padding-left: 0px;
   padding-right: 0px;
-  max-height: 85%;
+  min-height: 75%;
+  max-height: 75%;
   overflow: auto;
   direction:ltr;
 }

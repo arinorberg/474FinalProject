@@ -52,14 +52,14 @@
 				<p>Blood Alcohol Content is a metric for measuring alcohol intoxication. This unit of measure is typically calculated in mass by volume, in which 1% BAC is equivalent to 1% of a person’s blood concentration (1g of alcohol per 100g of blood in a person’s body). As BAC rises so does a person’s impairment. In the United States, the Legal Limit (alcohol level at which a person is considered legally impaired) is .08% BAC. A BAC of over .30% is considered life-threatening, in a person will be in high risk of death by severe alcohol poisoning.</p>
 
         <h3>Intoxication Symptoms:</h3>
-				<p>[[[[[TO DO]]]]]</p>
+				<p>Alcohol intoxication (a.k.a.drunkenness) is a physiological condition that occurs when a person consumes alcohol. The effects are physical (affect the body and its functions) as well as psychological (alter state of mind/consciousness). Symptoms include nausea, vomiting, slurred speech, loss of memory, and ataxia (inability to control body movements). People may also experience feelings of euphoria, social inhibition, decreased decision-making ability, and confusion and disorientation. Intoxication symptoms will differ at different blood alcohol content levels, and increase in severity as BAC increases. At high doses alcohol consumption can lead to coma or death. Note: these symptoms focus on the immediate effects of alcohol, but there are also many long-term effects alcohol can have on a person’s body and life.  </p>
 
       	<h3>Hangovers:</h3>
 				<p>[[[[[TO DO]]]]]</p>
 
 
       <!-- stimulator -->
-      </div><button class="collapsible" id="stimulator">Stimulator:</button>
+      </div><button class="collapsible" id="stimulator">Simulator:</button>
 			<div class="content" id="stimulatorContent">
 
         <div class="container" id="person">
@@ -119,18 +119,19 @@
       </div><button class="collapsible">Interpreting the Results:</button>
 			<div class="content" id="resultsText">
 
-        <h3>Current BAC:</h3>
-				<h4>The BAC in these results are calculated using this common formula:<br>
-				% BAC = (A x 5.14 / W x r) – .015 x H</h4>
+        <h3>Blood Alcohol Content:</h3>
+				<h4>The % BAC is calculated using this common formula:<br>
+				(A x 5.14 / W x r) – .015 x H</h4>
 				<p>A = liquid ounces of alcohol consumed<br>
 				W = a person’s weight in pounds<br>
 				r = a gender constant of alcohol distribution (.73 for men and .66 for women)*<br>
 				H = hours elapsed since drinking commenced</p>
 
-        <h3>Line Graph - BAC over next 5 hours:</h3>
-				<p>[[[[[TO DO]]]]]</p>
+        <h3>BAC over next 5 hours (line graph):</h3>
+				<p>Something to keep in mind when drinking is that alcohol metabolism occurs a lot slower than alcohol absorption. Meaning the time taken to sober up will be longer than than the time taken to get intoxicated. Also, while the effects of alcohol absorption varies quite differently across individuals, the ability to metabolize alcohol occurs at a similar rate for most people. Regardless of how much a person drinks, once the body reaches its peak BAC, it is only able to burn off 0.5 oz. alcohol per hour or .015% of blood alcohol content (BAC) per hour. </p>
+        <p>This line graph demonstrates the the metabolism rate of alcohol. It begins at the simulated person’s peak blood alcohol content, and shows their BAC over the next 5 hours. This visualization can be used to gauge how drunk the person will be in the hours following their alcohol consumption, and if or when they will be sober or be under the .08% legal limit.</p>
 
-        <h3>Current Symptoms:</h3>
+        <h3>Intoxication Symptoms:</h3>
 				<p>[[[[[TO DO -- tips on identifying alcohol posioning and what to do]]]]]</p>
 
         <h3>Hangover Symptoms:</h3>
@@ -160,13 +161,13 @@
 	<div class="container" id="effects">
 		<div class="container" id="bacbox">
 			<h2>Results:</h2>
-			<h3>Current Blood Alcohol Content:</h3>
+			<h3>Blood Alcohol Content:</h3>
 			<div id="BACresults">
 				<h4 id="currBAC"></h4>
 			</div>
 		</div>
 		<div class="container" id="drunknessResults">
-			<h3>Current Intoxication Symptoms:</h3>
+			<h3>Intoxication Symptoms:</h3>
 			<p id="currEffects"></p>
 		</div>
 		<div class="container" id="hangoverResults">

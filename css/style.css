@@ -82,6 +82,7 @@ input, select {
 .container {
   padding: 10px;
   display: inline-block;
+  margin-left: unset;
 }
 
 #effects {
@@ -91,6 +92,7 @@ input, select {
 }
 
 #scroll {
+  margin-left: 5%;
   position: fixed;
   width: 40%;
   padding-left: 0px;

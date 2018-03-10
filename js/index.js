@@ -316,6 +316,7 @@ function updateGraph(currentBAC, time) {
 		if (bac < 0) {
 			bac = 0;
 		}
+    // store data in HTML table using JSON: http://bl.ocks.org/jfreels/6734025
 		BACdata.push({
 			"hour": currhr,
 			"bloodAlcConc": bac
@@ -326,7 +327,7 @@ function updateGraph(currentBAC, time) {
 	x.domain(d3.extent(BACdata, function(d) {
 		return d.hour;
 	}));
-	y.domain([0, .55])
+	y.domain([0, .5])
 
 	d3.select("g").remove();
 	g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -391,7 +392,7 @@ function updateGraph(currentBAC, time) {
 }
 
 
-// for collabsible paragraphs: https://www.w3schools.com/howto/howto_js_collapsible.asp
+// collabsible paragraphs: https://www.w3schools.com/howto/howto_js_collapsible.asp
 var coll = document.getElementsByClassName("collapsible");
 var i;
 for (i = 0; i < coll.length; i++) {
